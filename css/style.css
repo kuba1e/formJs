@@ -35,7 +35,7 @@ body {
 }
 
 .customer-form input.error {
-  border: solid red;
+  border: solid rgba(255, 0, 0, 0.5);
   border-width: 4px;
 }
 
