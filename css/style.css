@@ -1,0 +1,80 @@
+body {
+  background: url("../img/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Heebo", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.form-container {
+  width: 50vw;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.customer-form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-form input {
+  width: 100%;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+  font-size: 24px;
+  background-color: cornsilk;
+}
+
+.customer-form input.error {
+  border: solid red;
+  border-width: 4px;
+}
+
+.customer-form button {
+  background-color: cornsilk;
+  padding: 10px 50px;
+  margin: 20px 0;
+  font-size: 24px;
+  border-radius: 5px;
+  align-self: center;
+  color: gray;
+  cursor: pointer;
+}
+
+.message-container {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: -50%;
+  width: 50%;
+  height: 20%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: black;
+  border-radius: 10px;
+}
+
+.message-container.show {
+  animation: 1s ease-in-out both showMessage;
+}
+
+@keyframes showMessage {
+  from {
+    top: -50%;
+  }
+  to {
+    top: 10%;
+  }
+}
