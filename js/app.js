@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const url = "https://httpbin.org/post";
   const customerForm = document.querySelector(".customer-form");
   const messageContainer = document.querySelector(".message-container");
+  const cardInput = document.querySelector(".card");
+
   customerForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const { target } = event;
@@ -20,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const doValidate = function (inputs) {
     let validationState = true;
+    const errorArray = [...document.querySelectorAll(".tips-container")];
+    deleteErrorTips(errorArray);
 
     inputs.forEach((element) => {
       let elementClassList = element.classList;
@@ -28,37 +32,28 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isCardValid(element.value)) {
           validationState = false;
           addInputErrorClassList(element);
-          showMessage(
-            "Please input the correct card number. Length must be 16 numbers",
-            messageContainer
-          );
+          element.nextElementSibling.classList.add("show");
         }
       }
       if (elementClassList.contains("email")) {
         if (!isEmailValid(element.value)) {
           validationState = false;
           addInputErrorClassList(element);
-          showMessage("Please input the correct email", messageContainer);
+          element.nextElementSibling.classList.add("show");
         }
       }
       if (elementClassList.contains("phone")) {
         if (!isPhoneNumberValid(element.value)) {
           validationState = false;
           addInputErrorClassList(element);
-          showMessage(
-            "Please input your number follow the format: +380---------",
-            messageContainer
-          );
+          element.nextElementSibling.classList.add("show");
         }
       }
       if (elementClassList.contains("name")) {
         if (!isNameValid(element.value)) {
           validationState = false;
           addInputErrorClassList(element);
-          showMessage(
-            "Please write you name with first capital letter and with the length more then 1 symbol",
-            messageContainer
-          );
+          element.nextElementSibling.classList.add("show");
         }
       }
     });
@@ -67,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const isNameValid = function (name) {
-    const regExp = /^[A-Z][a-z]+$/;
+    const regExp = /^([A-Z]|[А-Я])([a-z]|[а-я])+$/;
     return regExp.test(name);
   };
 
@@ -102,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (parseInt(response.status / 100) === 2) {
-        showMessage("You have just sent your form!", messageContainer);
+        showMessage("Form has been sent!", messageContainer);
       }
     } catch (error) {
       showMessage(`Something went wrong error!`, messageContainer);
@@ -116,5 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       messageBlock.classList.remove("show");
     }, 5000);
+  };
+
+  const deleteErrorTips = function (elementArray) {
+    elementArray.forEach((element) => {
+      element.classList.remove("show");
+    });
   };
 });
